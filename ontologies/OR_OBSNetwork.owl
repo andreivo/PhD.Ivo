@@ -1,0 +1,628 @@
+@prefix : <https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#> .
+@prefix qu: <http://purl.org/NET/ssnx/qu/qu#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ssn: <http://www.w3.org/2005/Incubator/ssn/ssnx/ssn#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix iot-lite: <http://purl.oclc.org/NET/UNIS/fiware/iot-lite#> .
+@prefix or_obsnertwork: <https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#> .
+@base <https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork> .
+
+<https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://purl.oclc.org/NET/UNIS/fiware/iot-lite#isSubSystemOf
+iot-lite:isSubSystemOf rdf:type owl:ObjectProperty ;
+                       owl:inverseOf ssn:hasSubSystem ;
+                       rdfs:domain ssn:System ;
+                       rdfs:range ssn:System ;
+                       rdfs:comment "This defines that a devices system is a subsystem of another system. For example, a multi-sensor device is a subsystem of a smart building testbed. This is the inverse of the SSN object property \"hasSubSystem\". It allows a graph to start from a subsystem. This is useful for resource-centric graphs."@en .
+
+
+###  http://www.w3.org/2005/Incubator/ssn/ssnx/ssn#hasSubSystem
+ssn:hasSubSystem rdf:type owl:ObjectProperty ;
+                 rdfs:domain ssn:System ;
+                 rdfs:range ssn:System .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#communicatesAlert
+:communicatesAlert rdf:type owl:ObjectProperty ;
+                   rdfs:domain :GovernmentAgency ;
+                   rdfs:range :MunicipalityAgency .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#hasSensor
+:hasSensor rdf:type owl:ObjectProperty ;
+           rdfs:domain ssn:SensingDevice ;
+           rdfs:range ssn:Sensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#hasSpecialistPerson
+:hasSpecialistPerson rdf:type owl:ObjectProperty ;
+                     rdfs:domain :GovernmentAgency ;
+                     rdfs:range :SpecialistPerson .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#hasSystem
+:hasSystem rdf:type owl:ObjectProperty ;
+           rdfs:domain :GovernmentAgency ,
+                       :MunicipalityAgency ;
+           rdfs:range ssn:System .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#processData
+:processData rdf:type owl:ObjectProperty ;
+             rdfs:domain :WarningIssuingServer ;
+             rdfs:range :Data .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#processFeedback
+:processFeedback rdf:type owl:ObjectProperty ;
+                 rdfs:domain :WarningIssuingServer ;
+                 rdfs:range :SpecialistPerson .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#produces
+:produces rdf:type owl:ObjectProperty ;
+          rdfs:domain ssn:Sensor ;
+          rdfs:range :Data .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#receiveAlert
+:receiveAlert rdf:type owl:ObjectProperty ;
+              rdfs:domain :AutomaticWarningSiren ,
+                          :GovernmentAgency ;
+              rdfs:range :Alert .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#receiveData
+:receiveData rdf:type owl:ObjectProperty ;
+             rdfs:domain :FTPServer ;
+             rdfs:range :Data .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#sendAlert
+:sendAlert rdf:type owl:ObjectProperty ;
+           rdfs:domain :WarningIssuingServer ;
+           rdfs:range :Alert .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#sendData
+:sendData rdf:type owl:ObjectProperty ;
+          rdfs:domain :ModemTelecom ;
+          rdfs:range :Data .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#turnsOn
+:turnsOn rdf:type owl:ObjectProperty ;
+         rdfs:domain :MunicipalityAgency ;
+         rdfs:range :ManualWarningSiren .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#lat
+geo:lat rdf:type owl:DatatypeProperty ;
+        rdfs:domain :DCP ;
+        rdfs:range xsd:float .
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#long
+geo:long rdf:type owl:DatatypeProperty ;
+         rdfs:domain :DCP ;
+         rdfs:range xsd:float .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#address
+:address rdf:type owl:DatatypeProperty ;
+         rdfs:domain :DCP ;
+         rdfs:range xsd:string .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#endpointClient
+:endpointClient rdf:type owl:DatatypeProperty ;
+                rdfs:domain :DCP ;
+                rdfs:range xsd:anyURI ;
+                rdfs:comment "Endpoint of the service. It is usually a URL where the service is available." .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#endpointServer
+:endpointServer rdf:type owl:DatatypeProperty ;
+                rdfs:domain :FTPServer ;
+                rdfs:range xsd:anyURI ;
+                rdfs:comment "Endpoint of the service. It is usually a URL where the service is available." .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#ftpPasswdClient
+:ftpPasswdClient rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :DCP ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "Define FTP passwd."@en .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#ftpPasswdServer
+:ftpPasswdServer rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :FTPServer ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "Define FTP passwd."@en .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#ftpUserClient
+:ftpUserClient rdf:type owl:DatatypeProperty ;
+               rdfs:domain :DCP ;
+               rdfs:range xsd:string ;
+               rdfs:comment "Define FTP user."@en .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#ftpUserServer
+:ftpUserServer rdf:type owl:DatatypeProperty ;
+               rdfs:domain :FTPServer ;
+               rdfs:range xsd:string ;
+               rdfs:comment "Define FTP user."@en .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#interfaceTypeClient
+:interfaceTypeClient rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :DCP ;
+                     rdfs:range xsd:string ;
+                     rdfs:comment "Defines the type of interface of the service endpoint, e.g. RESTful, NGSI-9, MQTT, CoAP etc."@en .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#interfaceTypeServer
+:interfaceTypeServer rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :FTPServer ;
+                     rdfs:range xsd:string ;
+                     rdfs:comment "Defines the type of interface of the service endpoint, e.g. RESTful, NGSI-9, MQTT, CoAP etc."@en .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#quantityKind
+:quantityKind rdf:type owl:DatatypeProperty ;
+              rdfs:domain ssn:Sensor ;
+              rdfs:range xsd:string .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#resolution
+:resolution rdf:type owl:DatatypeProperty ;
+            rdfs:domain ssn:Sensor ;
+            rdfs:range xsd:float .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#unit
+:unit rdf:type owl:DatatypeProperty ;
+      rdfs:domain ssn:Sensor ;
+      rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.oclc.org/NET/UNIS/fiware/iot-lite#ActuatingDevice
+iot-lite:ActuatingDevice rdf:type owl:Class ;
+                         rdfs:subClassOf ssn:Device ;
+                         rdfs:comment "Device that can actuate over an object or QuantityKind."@en .
+
+
+###  http://www.w3.org/2005/Incubator/ssn/ssnx/ssn#Device
+ssn:Device rdf:type owl:Class ;
+           rdfs:subClassOf ssn:System .
+
+
+###  http://www.w3.org/2005/Incubator/ssn/ssnx/ssn#SensingDevice
+ssn:SensingDevice rdf:type owl:Class ;
+                  rdfs:subClassOf ssn:Device ,
+                                  ssn:Sensor .
+
+
+###  http://www.w3.org/2005/Incubator/ssn/ssnx/ssn#Sensor
+ssn:Sensor rdf:type owl:Class ;
+           owl:disjointWith :Alert ,
+                            :Data ,
+                            :SpecialistPerson .
+
+
+###  http://www.w3.org/2005/Incubator/ssn/ssnx/ssn#System
+ssn:System rdf:type owl:Class ;
+           owl:disjointWith :Alert ,
+                            :Data ,
+                            :SpecialistPerson .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#Acqua
+:Acqua rdf:type owl:Class ;
+       rdfs:subClassOf :DCP ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasSensor ;
+                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass :SoilHumidityTemperatureSensor
+                       ] ;
+       owl:disjointWith :Agrometeorological ,
+                        :Automatic ,
+                        :Geological ,
+                        :Hydrological .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#Agrometeorological
+:Agrometeorological rdf:type owl:Class ;
+                    rdfs:subClassOf :DCP ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasSensor ;
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :NetRadiometers
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasSensor ;
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :Radiometers
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasSensor ;
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :SoilHumidityTemperatureSensor
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasSensor ;
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :WindDirectionSensor
+                                    ] ;
+                    owl:disjointWith :Automatic ,
+                                     :Geological ,
+                                     :Hydrological .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#Alert
+:Alert rdf:type owl:Class ;
+       owl:disjointWith :Data ,
+                        :SpecialistPerson .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#Automatic
+:Automatic rdf:type owl:Class ;
+           rdfs:subClassOf :DCP ;
+           owl:disjointWith :Geological ,
+                            :Hydrological .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#AutomaticWarningSiren
+:AutomaticWarningSiren rdf:type owl:Class ;
+                       rdfs:subClassOf :WarningSiren .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#CurrentSensor
+:CurrentSensor rdf:type owl:Class ;
+               rdfs:subClassOf ssn:Sensor ;
+               owl:disjointWith :InternalHumidityTemperatureSensor ,
+                                :NetRadiometers ,
+                                :PhotographicCamera ,
+                                :Pluviometer ,
+                                :Radiometers ,
+                                :RiverLevelSensor ,
+                                :SoilHumidityTemperatureSensor ,
+                                :VoltageSensor ,
+                                :WindDirectionSensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#DCP
+:DCP rdf:type owl:Class ;
+     rdfs:subClassOf ssn:SensingDevice ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :hasSensor ;
+                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                       owl:onClass :CurrentSensor
+                     ] ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :hasSensor ;
+                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                       owl:onClass :InternalHumidityTemperatureSensor
+                     ] ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :hasSensor ;
+                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                       owl:onClass :ModemTelecom
+                     ] ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :hasSensor ;
+                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                       owl:onClass :Pluviometer
+                     ] ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :hasSensor ;
+                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                       owl:onClass :VoltageSensor
+                     ] .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#Data
+:Data rdf:type owl:Class ;
+      owl:disjointWith :SpecialistPerson .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#FTPServer
+:FTPServer rdf:type owl:Class ;
+           rdfs:subClassOf :ServerComputer .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#Geological
+:Geological rdf:type owl:Class ;
+            rdfs:subClassOf :DCP ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSensor ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onClass :SoilHumidityTemperatureSensor
+                            ] ;
+            owl:disjointWith :Hydrological .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#GovernmentAgency
+:GovernmentAgency rdf:type owl:Class .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#Hydrological
+:Hydrological rdf:type owl:Class ;
+              rdfs:subClassOf :DCP ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :hasSensor ;
+                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                owl:onClass :PhotographicCamera
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :hasSensor ;
+                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                owl:onClass :RiverLevelSensor
+                              ] .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#InternalHumidityTemperatureSensor
+:InternalHumidityTemperatureSensor rdf:type owl:Class ;
+                                   rdfs:subClassOf ssn:Sensor ;
+                                   owl:disjointWith :NetRadiometers ,
+                                                    :PhotographicCamera ,
+                                                    :Pluviometer ,
+                                                    :Radiometers ,
+                                                    :RiverLevelSensor ,
+                                                    :SoilHumidityTemperatureSensor ,
+                                                    :VoltageSensor ,
+                                                    :WindDirectionSensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#ManualWarningSiren
+:ManualWarningSiren rdf:type owl:Class ;
+                    rdfs:subClassOf :WarningSiren .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#ModemTelecom
+:ModemTelecom rdf:type owl:Class ;
+              rdfs:subClassOf ssn:Device .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#MunicipalityAgency
+:MunicipalityAgency rdf:type owl:Class .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#NetRadiometers
+:NetRadiometers rdf:type owl:Class ;
+                rdfs:subClassOf ssn:Sensor ;
+                owl:disjointWith :PhotographicCamera ,
+                                 :Pluviometer ,
+                                 :Radiometers ,
+                                 :RiverLevelSensor ,
+                                 :SoilHumidityTemperatureSensor ,
+                                 :VoltageSensor ,
+                                 :WindDirectionSensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#PhotographicCamera
+:PhotographicCamera rdf:type owl:Class ;
+                    rdfs:subClassOf ssn:Sensor ;
+                    owl:disjointWith :Pluviometer ,
+                                     :Radiometers ,
+                                     :RiverLevelSensor ,
+                                     :SoilHumidityTemperatureSensor ,
+                                     :VoltageSensor ,
+                                     :WindDirectionSensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#Pluviometer
+:Pluviometer rdf:type owl:Class ;
+             rdfs:subClassOf ssn:Sensor ;
+             owl:disjointWith :Radiometers ,
+                              :RiverLevelSensor ,
+                              :SoilHumidityTemperatureSensor ,
+                              :VoltageSensor ,
+                              :WindDirectionSensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#Radiometers
+:Radiometers rdf:type owl:Class ;
+             rdfs:subClassOf ssn:Sensor ;
+             owl:disjointWith :RiverLevelSensor ,
+                              :SoilHumidityTemperatureSensor ,
+                              :VoltageSensor ,
+                              :WindDirectionSensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#RiverLevelSensor
+:RiverLevelSensor rdf:type owl:Class ;
+                  rdfs:subClassOf ssn:Sensor ;
+                  owl:disjointWith :SoilHumidityTemperatureSensor ,
+                                   :VoltageSensor ,
+                                   :WindDirectionSensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#ServerComputer
+:ServerComputer rdf:type owl:Class ;
+                rdfs:subClassOf ssn:System .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#SoilHumidityTemperatureSensor
+:SoilHumidityTemperatureSensor rdf:type owl:Class ;
+                               rdfs:subClassOf ssn:Sensor ;
+                               owl:disjointWith :VoltageSensor ,
+                                                :WindDirectionSensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#SpecialistPerson
+:SpecialistPerson rdf:type owl:Class .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#VoltageSensor
+:VoltageSensor rdf:type owl:Class ;
+               rdfs:subClassOf ssn:Sensor ;
+               owl:disjointWith :WindDirectionSensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#WarningIssuingServer
+:WarningIssuingServer rdf:type owl:Class ;
+                      rdfs:subClassOf :ServerComputer .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#WarningSiren
+:WarningSiren rdf:type owl:Class ;
+              rdfs:subClassOf iot-lite:ActuatingDevice .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#WindDirectionSensor
+:WindDirectionSensor rdf:type owl:Class ;
+                     rdfs:subClassOf ssn:Sensor .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#A350160801
+:A350160801 rdf:type owl:NamedIndividual ,
+                     :Automatic ;
+            iot-lite:isSubSystemOf :ObservacionalNetwork ;
+            :hasSensor :A350160801_CurrentSensor ,
+                       :A350160801_InternalHumidityTemperatureSensor ,
+                       :A350160801_ModemTelecom ,
+                       :A350160801_Pluviometer ,
+                       :A350160801_VoltageSensor ;
+            geo:lat "-22.73563"^^xsd:float ;
+            geo:long "-47.31487"^^xsd:float ;
+            :address "AVENIDA NOSSA SRA DE FATIMA,567 - Vila Santa Isabel - SP"^^xsd:string ;
+            :endpointClient "ftp.cemaden.gov.br/dados"^^xsd:anyURI ;
+            :ftpPasswdClient "passwd123"^^xsd:string ;
+            :ftpUserClient "user123"^^xsd:string ;
+            :interfaceTypeClient "FTP Server"^^xsd:string .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#A350160801_CurrentSensor
+:A350160801_CurrentSensor rdf:type owl:NamedIndividual ,
+                                   :CurrentSensor ;
+                          :quantityKind "corrent"^^xsd:string ;
+                          :resolution "0.2"^^xsd:float ;
+                          :unit "amper" .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#A350160801_Data
+:A350160801_Data rdf:type owl:NamedIndividual ,
+                          :Data .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#A350160801_InternalHumidityTemperatureSensor
+:A350160801_InternalHumidityTemperatureSensor rdf:type owl:NamedIndividual ,
+                                                       :InternalHumidityTemperatureSensor ;
+                                              :quantityKind "percentage of humidity / degrees celsius"^^xsd:string ;
+                                              :resolution "0.2"^^xsd:float ;
+                                              :unit "% / ºC" .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#A350160801_ModemTelecom
+:A350160801_ModemTelecom rdf:type owl:NamedIndividual ,
+                                  :ModemTelecom ;
+                         :sendData :A350160801_Data .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#A350160801_Pluviometer
+:A350160801_Pluviometer rdf:type owl:NamedIndividual ,
+                                 :Pluviometer ;
+                        :produces :A350160801_Data ;
+                        :quantityKind "rain"^^xsd:string ;
+                        :resolution "0.2"^^xsd:float ;
+                        :unit "mm³" .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#A350160801_VoltageSensor
+:A350160801_VoltageSensor rdf:type owl:NamedIndividual ,
+                                   :VoltageSensor ;
+                          :quantityKind "Voltage"^^xsd:string ;
+                          :resolution "0.2"^^xsd:float ;
+                          :unit "V" .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#Andre
+:Andre rdf:type owl:NamedIndividual ,
+                :SpecialistPerson .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#AutomaticSiren
+:AutomaticSiren rdf:type owl:NamedIndividual ,
+                         :AutomaticWarningSiren ;
+                :receiveAlert :Cemaden_Alert .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#Cemaden
+:Cemaden rdf:type owl:NamedIndividual ,
+                  :GovernmentAgency ;
+         :hasSpecialistPerson :Andre ;
+         :hasSystem :Cemaden_FTPServer ,
+                    :ObservacionalNetwork .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#Cemaden_Alert
+:Cemaden_Alert rdf:type owl:NamedIndividual ,
+                        :Alert .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#Cemaden_FTPServer
+:Cemaden_FTPServer rdf:type owl:NamedIndividual ,
+                            :FTPServer ;
+                   :receiveData :A350160801_Data ;
+                   :endpointServer "ftp.cemaden.gov.br/dados"^^xsd:anyURI ;
+                   :ftpPasswdServer "passwd123"^^xsd:string ;
+                   :ftpUserServer "user123"^^xsd:string ;
+                   :interfaceTypeServer "FTP Server"^^xsd:string .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#Cemaden_WarningServer
+:Cemaden_WarningServer rdf:type owl:NamedIndividual ,
+                                :WarningIssuingServer ;
+                       :processData :A350160801_Data ;
+                       :processFeedback :Andre ;
+                       :sendAlert :Cemaden_Alert .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#Cenad
+:Cenad rdf:type owl:NamedIndividual ,
+                :GovernmentAgency ;
+       :communicatesAlert :DefenseCivil ;
+       :receiveAlert :Cemaden_Alert .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#DefenseCivil
+:DefenseCivil rdf:type owl:NamedIndividual ,
+                       :MunicipalityAgency ;
+              :turnsOn :ManualSiren .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#ManualSiren
+:ManualSiren rdf:type owl:NamedIndividual ,
+                      :ManualWarningSiren .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork#ObservacionalNetwork
+:ObservacionalNetwork rdf:type owl:NamedIndividual ,
+                               ssn:System .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
