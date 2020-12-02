@@ -1,0 +1,963 @@
+@prefix : <https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#> .
+@prefix qu: <http://purl.org/NET/ssnx/qu/qu#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ssn: <http://www.w3.org/2005/Incubator/ssn/ssnx/ssn#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix iot-lite: <http://purl.oclc.org/NET/UNIS/fiware/iot-lite#> .
+@prefix or_obsnertwork: <https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#> .
+@base <https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture> .
+
+<https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://purl.oclc.org/NET/UNIS/fiware/iot-lite#isSubSystemOf
+iot-lite:isSubSystemOf rdf:type owl:ObjectProperty ;
+                       owl:inverseOf ssn:hasSubSystem ;
+                       rdfs:domain ssn:System ;
+                       rdfs:range ssn:System ;
+                       rdfs:comment "This defines that a devices system is a subsystem of another system. For example, a multi-sensor device is a subsystem of a smart building testbed. This is the inverse of the SSN object property \"hasSubSystem\". It allows a graph to start from a subsystem. This is useful for resource-centric graphs."@en .
+
+
+###  http://www.w3.org/2005/Incubator/ssn/ssnx/ssn#hasSubSystem
+ssn:hasSubSystem rdf:type owl:ObjectProperty ;
+                 rdfs:domain ssn:System ;
+                 rdfs:range ssn:System .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#communicatesAlert
+or_obsnertwork:communicatesAlert rdf:type owl:ObjectProperty ;
+                                 rdfs:domain or_obsnertwork:GovernmentAgency ;
+                                 rdfs:range or_obsnertwork:MunicipalityAgency .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasActuator
+or_obsnertwork:hasActuator rdf:type owl:ObjectProperty ;
+                           rdfs:domain or_obsnertwork:DCP ;
+                           rdfs:range iot-lite:ActuatingDevice .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasAlertIssuing
+or_obsnertwork:hasAlertIssuing rdf:type owl:ObjectProperty ;
+                               rdfs:domain or_obsnertwork:DataProcess ;
+                               rdfs:range or_obsnertwork:AlertIssuing .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasBattery
+or_obsnertwork:hasBattery rdf:type owl:ObjectProperty ;
+                          rdfs:domain or_obsnertwork:PowerSystem ;
+                          rdfs:range or_obsnertwork:BatteryPowerSystem .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasDC
+or_obsnertwork:hasDC rdf:type owl:ObjectProperty ;
+                     rdfs:domain or_obsnertwork:PowerSystem ;
+                     rdfs:range or_obsnertwork:DCPowerSystem .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasDCP
+or_obsnertwork:hasDCP rdf:type owl:ObjectProperty ;
+                      rdfs:domain or_obsnertwork:ObservacionalNetwork ;
+                      rdfs:range or_obsnertwork:DCP .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasDataProcess
+or_obsnertwork:hasDataProcess rdf:type owl:ObjectProperty ;
+                              rdfs:domain or_obsnertwork:ObservacionalNetwork ;
+                              rdfs:range or_obsnertwork:DataProcess .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasDatabase
+or_obsnertwork:hasDatabase rdf:type owl:ObjectProperty ;
+                           rdfs:domain or_obsnertwork:ObservacionalNetwork ;
+                           rdfs:range or_obsnertwork:Database .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasDevicesDataTypesManager
+or_obsnertwork:hasDevicesDataTypesManager rdf:type owl:ObjectProperty ;
+                                          rdfs:domain or_obsnertwork:ManagerSystem ;
+                                          rdfs:range or_obsnertwork:DevicesDataTypesManager .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasFTPServer
+or_obsnertwork:hasFTPServer rdf:type owl:ObjectProperty ;
+                            rdfs:domain or_obsnertwork:Gateway ;
+                            rdfs:range or_obsnertwork:FTPServer .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasGateway
+or_obsnertwork:hasGateway rdf:type owl:ObjectProperty ;
+                          rdfs:domain or_obsnertwork:ObservacionalNetwork ;
+                          rdfs:range or_obsnertwork:Gateway .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasIntegrationMediator
+or_obsnertwork:hasIntegrationMediator rdf:type owl:ObjectProperty ;
+                                      rdfs:domain or_obsnertwork:ObservacionalNetwork ;
+                                      rdfs:range or_obsnertwork:IntegrationMediator .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasMQTTClient
+or_obsnertwork:hasMQTTClient rdf:type owl:ObjectProperty ;
+                             rdfs:domain or_obsnertwork:IntegrationMediator ;
+                             rdfs:range or_obsnertwork:MQTTClient .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasMQTTServer
+or_obsnertwork:hasMQTTServer rdf:type owl:ObjectProperty ;
+                             rdfs:domain or_obsnertwork:Gateway ;
+                             rdfs:range or_obsnertwork:MQTTServer .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasManagerSystem
+or_obsnertwork:hasManagerSystem rdf:type owl:ObjectProperty ;
+                                rdfs:domain or_obsnertwork:ObservacionalNetwork ;
+                                rdfs:range or_obsnertwork:ManagerSystem .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasMobileApps
+or_obsnertwork:hasMobileApps rdf:type owl:ObjectProperty ;
+                             rdfs:domain or_obsnertwork:UserProducts ;
+                             rdfs:range or_obsnertwork:MobileApps .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasModemTelecom
+or_obsnertwork:hasModemTelecom rdf:type owl:ObjectProperty ;
+                               rdfs:domain or_obsnertwork:TransportLayers ;
+                               rdfs:range or_obsnertwork:ModemTelecom .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasNOSQL
+or_obsnertwork:hasNOSQL rdf:type owl:ObjectProperty ;
+                        rdfs:domain or_obsnertwork:Database ;
+                        rdfs:range or_obsnertwork:No-SQL .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasNormalizeData
+or_obsnertwork:hasNormalizeData rdf:type owl:ObjectProperty ;
+                                rdfs:domain or_obsnertwork:IntegrationMediator ;
+                                rdfs:range or_obsnertwork:NormalizeData .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasObservacionalNetwork
+or_obsnertwork:hasObservacionalNetwork rdf:type owl:ObjectProperty ;
+                                       rdfs:domain or_obsnertwork:GovernmentAgency ;
+                                       rdfs:range or_obsnertwork:ObservacionalNetwork .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasOntologyModel
+or_obsnertwork:hasOntologyModel rdf:type owl:ObjectProperty ;
+                                rdfs:domain or_obsnertwork:Database ;
+                                rdfs:range or_obsnertwork:OntologyModel .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasOntologyModelManager
+or_obsnertwork:hasOntologyModelManager rdf:type owl:ObjectProperty ;
+                                       rdfs:domain or_obsnertwork:ManagerSystem ;
+                                       rdfs:range or_obsnertwork:OntologyModelManager .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasOntologyQueryService
+or_obsnertwork:hasOntologyQueryService rdf:type owl:ObjectProperty ;
+                                       rdfs:domain or_obsnertwork:IntegrationMediator ;
+                                       rdfs:range or_obsnertwork:OntologyQueryService .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasPostgres
+or_obsnertwork:hasPostgres rdf:type owl:ObjectProperty ;
+                           rdfs:domain or_obsnertwork:Database ;
+                           rdfs:range or_obsnertwork:Postgres .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasPowerSystem
+or_obsnertwork:hasPowerSystem rdf:type owl:ObjectProperty ;
+                              rdfs:domain or_obsnertwork:DCP ;
+                              rdfs:range or_obsnertwork:PowerSystem .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasProductProducer
+or_obsnertwork:hasProductProducer rdf:type owl:ObjectProperty ;
+                                  rdfs:domain or_obsnertwork:DataProcess ;
+                                  rdfs:range or_obsnertwork:ProductProducer .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasSensor
+or_obsnertwork:hasSensor rdf:type owl:ObjectProperty ;
+                         rdfs:domain or_obsnertwork:DCP ;
+                         rdfs:range ssn:Sensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasSpecialistPerson
+or_obsnertwork:hasSpecialistPerson rdf:type owl:ObjectProperty ;
+                                   rdfs:domain or_obsnertwork:GovernmentAgency ;
+                                   rdfs:range or_obsnertwork:SpecialistPerson .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasSuspectQualifier
+or_obsnertwork:hasSuspectQualifier rdf:type owl:ObjectProperty ;
+                                   rdfs:domain or_obsnertwork:ObservacionalNetwork ;
+                                   rdfs:range or_obsnertwork:SuspectQualifier .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasSuspiciousDataQualifier
+or_obsnertwork:hasSuspiciousDataQualifier rdf:type owl:ObjectProperty ;
+                                          rdfs:domain or_obsnertwork:SuspectQualifier ;
+                                          rdfs:range or_obsnertwork:SuspiciousDataQualifier .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasSuspiciousMetadataQualifier
+or_obsnertwork:hasSuspiciousMetadataQualifier rdf:type owl:ObjectProperty ;
+                                              rdfs:domain or_obsnertwork:SuspectQualifier ;
+                                              rdfs:range or_obsnertwork:SuspiciousMetadataQualifier .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasSystem
+or_obsnertwork:hasSystem rdf:type owl:ObjectProperty ;
+                         rdfs:domain or_obsnertwork:GovernmentAgency ,
+                                     or_obsnertwork:MunicipalityAgency ;
+                         rdfs:range ssn:System .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasTransportLayer
+or_obsnertwork:hasTransportLayer rdf:type owl:ObjectProperty ;
+                                 rdfs:domain or_obsnertwork:DCP ;
+                                 rdfs:range or_obsnertwork:TransportLayers .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasUserProducts
+or_obsnertwork:hasUserProducts rdf:type owl:ObjectProperty ;
+                               rdfs:domain or_obsnertwork:ObservacionalNetwork ;
+                               rdfs:range or_obsnertwork:UserProducts .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasWebService
+or_obsnertwork:hasWebService rdf:type owl:ObjectProperty ;
+                             rdfs:domain or_obsnertwork:UserProducts ;
+                             rdfs:range or_obsnertwork:WebService .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasWebSite
+or_obsnertwork:hasWebSite rdf:type owl:ObjectProperty ;
+                          rdfs:domain or_obsnertwork:UserProducts ;
+                          rdfs:range or_obsnertwork:WebSite .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasWifi
+or_obsnertwork:hasWifi rdf:type owl:ObjectProperty ;
+                       rdfs:domain or_obsnertwork:TransportLayers ;
+                       rdfs:range or_obsnertwork:Wifi .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#processData
+or_obsnertwork:processData rdf:type owl:ObjectProperty ;
+                           rdfs:domain or_obsnertwork:ProductProducer ;
+                           rdfs:range or_obsnertwork:Data .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#processFeedback
+or_obsnertwork:processFeedback rdf:type owl:ObjectProperty ;
+                               rdfs:domain or_obsnertwork:ProductProducer ;
+                               rdfs:range or_obsnertwork:SpecialistPerson .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#producesAlert
+or_obsnertwork:producesAlert rdf:type owl:ObjectProperty ;
+                             rdfs:domain or_obsnertwork:AlertIssuing ;
+                             rdfs:range or_obsnertwork:Alert .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#producesData
+or_obsnertwork:producesData rdf:type owl:ObjectProperty ;
+                            rdfs:domain ssn:Sensor ;
+                            rdfs:range or_obsnertwork:Data .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#readDatabase
+or_obsnertwork:readDatabase rdf:type owl:ObjectProperty ;
+                            rdfs:domain or_obsnertwork:DataProcess ,
+                                        or_obsnertwork:IntegrationMediator ,
+                                        or_obsnertwork:ManagerSystem ,
+                                        or_obsnertwork:SuspectQualifier ,
+                                        or_obsnertwork:UserProducts ;
+                            rdfs:range or_obsnertwork:Database .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#receiveAlert
+or_obsnertwork:receiveAlert rdf:type owl:ObjectProperty ;
+                            rdfs:domain or_obsnertwork:AutomaticWarningSiren ,
+                                        or_obsnertwork:GovernmentAgency ;
+                            rdfs:range or_obsnertwork:Alert .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#receiveData
+or_obsnertwork:receiveData rdf:type owl:ObjectProperty ;
+                           rdfs:domain or_obsnertwork:Gateway ;
+                           rdfs:range or_obsnertwork:Data .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#sendAlert
+or_obsnertwork:sendAlert rdf:type owl:ObjectProperty ;
+                         rdfs:domain or_obsnertwork:AlertIssuing ;
+                         rdfs:range or_obsnertwork:Alert .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#sendData
+or_obsnertwork:sendData rdf:type owl:ObjectProperty ;
+                        rdfs:domain or_obsnertwork:TransportLayers ;
+                        rdfs:range or_obsnertwork:Data .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#turnsOn
+or_obsnertwork:turnsOn rdf:type owl:ObjectProperty ;
+                       rdfs:domain or_obsnertwork:MunicipalityAgency ;
+                       rdfs:range or_obsnertwork:ManualWarningSiren .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#writeDatabase
+or_obsnertwork:writeDatabase rdf:type owl:ObjectProperty ;
+                             rdfs:domain or_obsnertwork:DataProcess ,
+                                         or_obsnertwork:IntegrationMediator ,
+                                         or_obsnertwork:ManagerSystem ,
+                                         or_obsnertwork:SuspectQualifier ,
+                                         or_obsnertwork:UserProducts ;
+                             rdfs:range or_obsnertwork:Database .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#lat
+geo:lat rdf:type owl:DatatypeProperty ;
+        rdfs:domain or_obsnertwork:DCP ;
+        rdfs:range xsd:float .
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#long
+geo:long rdf:type owl:DatatypeProperty ;
+         rdfs:domain or_obsnertwork:DCP ;
+         rdfs:range xsd:float .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#address
+or_obsnertwork:address rdf:type owl:DatatypeProperty ;
+                       rdfs:domain or_obsnertwork:DCP ;
+                       rdfs:range xsd:string .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#collectionDatetime
+or_obsnertwork:collectionDatetime rdf:type owl:DatatypeProperty ;
+                                  rdfs:domain or_obsnertwork:Data ;
+                                  rdfs:range xsd:dateTimeStamp .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#dataType
+or_obsnertwork:dataType rdf:type owl:DatatypeProperty ;
+                        rdfs:domain or_obsnertwork:Data .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#dataValue
+or_obsnertwork:dataValue rdf:type owl:DatatypeProperty ;
+                         rdfs:domain or_obsnertwork:Data .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#dcpExtCode
+or_obsnertwork:dcpExtCode rdf:type owl:DatatypeProperty ;
+                          owl:equivalentProperty or_obsnertwork:stationCode ;
+                          rdfs:domain or_obsnertwork:Data ;
+                          rdfs:range xsd:string .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#dcpExternalCode
+or_obsnertwork:dcpExternalCode rdf:type owl:DatatypeProperty ;
+                               rdfs:domain or_obsnertwork:DCP ;
+                               rdfs:range xsd:string .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#endpointClient
+or_obsnertwork:endpointClient rdf:type owl:DatatypeProperty ;
+                              rdfs:domain or_obsnertwork:DCP ;
+                              rdfs:range xsd:anyURI ;
+                              rdfs:comment "Endpoint of the service. It is usually a URL where the service is available." .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#endpointServer
+or_obsnertwork:endpointServer rdf:type owl:DatatypeProperty ;
+                              rdfs:domain or_obsnertwork:Gateway ;
+                              rdfs:range xsd:anyURI ;
+                              rdfs:comment "Endpoint of the service. It is usually a URL where the service is available." .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#interfaceTypeClient
+or_obsnertwork:interfaceTypeClient rdf:type owl:DatatypeProperty ;
+                                   rdfs:domain or_obsnertwork:DCP ;
+                                   rdfs:range xsd:string ;
+                                   rdfs:comment "Defines the type of interface of the service endpoint, e.g. RESTful, NGSI-9, MQTT, CoAP etc."@en .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#passwdClient
+or_obsnertwork:passwdClient rdf:type owl:DatatypeProperty ;
+                            rdfs:domain or_obsnertwork:DCP ;
+                            rdfs:range xsd:string ;
+                            rdfs:comment "Define FTP passwd."@en .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#passwdServer
+or_obsnertwork:passwdServer rdf:type owl:DatatypeProperty ;
+                            rdfs:domain or_obsnertwork:Gateway ;
+                            rdfs:range xsd:string ;
+                            rdfs:comment "Define FTP passwd."@en .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#quantityKind
+or_obsnertwork:quantityKind rdf:type owl:DatatypeProperty ;
+                            rdfs:domain ssn:Sensor ;
+                            rdfs:range xsd:string .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#resolution
+or_obsnertwork:resolution rdf:type owl:DatatypeProperty ;
+                          rdfs:domain ssn:Sensor ;
+                          rdfs:range xsd:float .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#sentDatetime
+or_obsnertwork:sentDatetime rdf:type owl:DatatypeProperty ;
+                            rdfs:domain or_obsnertwork:Data ;
+                            rdfs:range xsd:dateTimeStamp .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#stationCode
+or_obsnertwork:stationCode rdf:type owl:DatatypeProperty ;
+                           rdfs:domain or_obsnertwork:Data ;
+                           rdfs:range xsd:string .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#unit
+or_obsnertwork:unit rdf:type owl:DatatypeProperty ;
+                    rdfs:domain ssn:Sensor ;
+                    rdfs:range xsd:string .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#userClient
+or_obsnertwork:userClient rdf:type owl:DatatypeProperty ;
+                          rdfs:domain or_obsnertwork:DCP ;
+                          rdfs:range xsd:string ;
+                          rdfs:comment "Define FTP user."@en .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#userServer
+or_obsnertwork:userServer rdf:type owl:DatatypeProperty ;
+                          rdfs:domain or_obsnertwork:Gateway ;
+                          rdfs:range xsd:string ;
+                          rdfs:comment "Define FTP user."@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.oclc.org/NET/UNIS/fiware/iot-lite#ActuatingDevice
+iot-lite:ActuatingDevice rdf:type owl:Class ;
+                         rdfs:subClassOf ssn:Device ;
+                         owl:disjointWith ssn:SensingDevice ,
+                                          or_obsnertwork:PowerSystem ;
+                         rdfs:comment "Device that can actuate over an object or QuantityKind."@en .
+
+
+###  http://www.w3.org/2005/Incubator/ssn/ssnx/ssn#Device
+ssn:Device rdf:type owl:Class ;
+           rdfs:subClassOf ssn:System ;
+           owl:disjointWith or_obsnertwork:DataProcess ,
+                            or_obsnertwork:Database ,
+                            or_obsnertwork:Gateway ,
+                            or_obsnertwork:IntegrationMediator ,
+                            or_obsnertwork:ManagerSystem ,
+                            or_obsnertwork:ObservacionalNetwork ,
+                            or_obsnertwork:SuspectQualifier ,
+                            or_obsnertwork:TransportLayers ,
+                            or_obsnertwork:UserProducts .
+
+
+###  http://www.w3.org/2005/Incubator/ssn/ssnx/ssn#SensingDevice
+ssn:SensingDevice rdf:type owl:Class ;
+                  rdfs:subClassOf ssn:Device ,
+                                  ssn:Sensor ;
+                  owl:disjointWith or_obsnertwork:PowerSystem .
+
+
+###  http://www.w3.org/2005/Incubator/ssn/ssnx/ssn#Sensor
+ssn:Sensor rdf:type owl:Class ;
+           owl:disjointWith or_obsnertwork:Alert ,
+                            or_obsnertwork:Data ,
+                            or_obsnertwork:GovernmentAgency ,
+                            or_obsnertwork:MunicipalityAgency ,
+                            or_obsnertwork:SpecialistPerson .
+
+
+###  http://www.w3.org/2005/Incubator/ssn/ssnx/ssn#System
+ssn:System rdf:type owl:Class ;
+           owl:disjointWith or_obsnertwork:Alert ,
+                            or_obsnertwork:Data ,
+                            or_obsnertwork:GovernmentAgency ,
+                            or_obsnertwork:MunicipalityAgency ,
+                            or_obsnertwork:SpecialistPerson .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Acqua
+or_obsnertwork:Acqua rdf:type owl:Class ;
+                     rdfs:subClassOf or_obsnertwork:DCP ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty or_obsnertwork:hasSensor ;
+                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:onClass or_obsnertwork:SoilHumidityTemperatureSensor
+                                     ] ;
+                     owl:disjointWith or_obsnertwork:Agrometeorological ,
+                                      or_obsnertwork:Automatic ,
+                                      or_obsnertwork:Geological ,
+                                      or_obsnertwork:Hydrological .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Agrometeorological
+or_obsnertwork:Agrometeorological rdf:type owl:Class ;
+                                  rdfs:subClassOf or_obsnertwork:DCP ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty or_obsnertwork:hasSensor ;
+                                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                    owl:onClass or_obsnertwork:NetRadiometers
+                                                  ] ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty or_obsnertwork:hasSensor ;
+                                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                    owl:onClass or_obsnertwork:Radiometers
+                                                  ] ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty or_obsnertwork:hasSensor ;
+                                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                    owl:onClass or_obsnertwork:SoilHumidityTemperatureSensor
+                                                  ] ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty or_obsnertwork:hasSensor ;
+                                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                    owl:onClass or_obsnertwork:WindDirectionSensor
+                                                  ] ;
+                                  owl:disjointWith or_obsnertwork:Automatic ,
+                                                   or_obsnertwork:Geological ,
+                                                   or_obsnertwork:Hydrological .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Alert
+or_obsnertwork:Alert rdf:type owl:Class ;
+                     owl:disjointWith or_obsnertwork:Data ,
+                                      or_obsnertwork:GovernmentAgency ,
+                                      or_obsnertwork:MunicipalityAgency ,
+                                      or_obsnertwork:SpecialistPerson .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#AlertIssuing
+or_obsnertwork:AlertIssuing rdf:type owl:Class ;
+                            rdfs:subClassOf or_obsnertwork:DataProcess ;
+                            owl:disjointWith or_obsnertwork:ProductProducer .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Automatic
+or_obsnertwork:Automatic rdf:type owl:Class ;
+                         rdfs:subClassOf or_obsnertwork:DCP ;
+                         owl:disjointWith or_obsnertwork:Geological ,
+                                          or_obsnertwork:Hydrological .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#AutomaticWarningSiren
+or_obsnertwork:AutomaticWarningSiren rdf:type owl:Class ;
+                                     rdfs:subClassOf or_obsnertwork:WarningSiren .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#BatteryPowerSystem
+or_obsnertwork:BatteryPowerSystem rdf:type owl:Class ;
+                                  rdfs:subClassOf or_obsnertwork:PowerSystem .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#CurrentSensor
+or_obsnertwork:CurrentSensor rdf:type owl:Class ;
+                             rdfs:subClassOf ssn:Sensor ;
+                             owl:disjointWith or_obsnertwork:InternalHumidityTemperatureSensor ,
+                                              or_obsnertwork:NetRadiometers ,
+                                              or_obsnertwork:PhotographicCamera ,
+                                              or_obsnertwork:Pluviometer ,
+                                              or_obsnertwork:Radiometers ,
+                                              or_obsnertwork:RiverLevelSensor ,
+                                              or_obsnertwork:SoilHumidityTemperatureSensor ,
+                                              or_obsnertwork:VoltageSensor ,
+                                              or_obsnertwork:WindDirectionSensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#DCP
+or_obsnertwork:DCP rdf:type owl:Class ;
+                   rdfs:subClassOf ssn:SensingDevice ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty or_obsnertwork:hasTransportLayer ;
+                                     owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                     owl:onClass or_obsnertwork:TransportLayers
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty or_obsnertwork:hasSensor ;
+                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass or_obsnertwork:CurrentSensor
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty or_obsnertwork:hasSensor ;
+                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass or_obsnertwork:InternalHumidityTemperatureSensor
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty or_obsnertwork:hasSensor ;
+                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass or_obsnertwork:Pluviometer
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty or_obsnertwork:hasSensor ;
+                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass or_obsnertwork:VoltageSensor
+                                   ] .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#DCPowerSystem
+or_obsnertwork:DCPowerSystem rdf:type owl:Class ;
+                             rdfs:subClassOf or_obsnertwork:PowerSystem .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Data
+or_obsnertwork:Data rdf:type owl:Class ;
+                    owl:disjointWith or_obsnertwork:GovernmentAgency ,
+                                     or_obsnertwork:MunicipalityAgency ,
+                                     or_obsnertwork:SpecialistPerson .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#DataProcess
+or_obsnertwork:DataProcess rdf:type owl:Class ;
+                           rdfs:subClassOf ssn:System ;
+                           owl:disjointWith or_obsnertwork:Database ,
+                                            or_obsnertwork:Gateway ,
+                                            or_obsnertwork:IntegrationMediator ,
+                                            or_obsnertwork:ManagerSystem ,
+                                            or_obsnertwork:ObservacionalNetwork ,
+                                            or_obsnertwork:SuspectQualifier ,
+                                            or_obsnertwork:TransportLayers ,
+                                            or_obsnertwork:UserProducts .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Database
+or_obsnertwork:Database rdf:type owl:Class ;
+                        rdfs:subClassOf ssn:System ;
+                        owl:disjointWith or_obsnertwork:Gateway ,
+                                         or_obsnertwork:IntegrationMediator ,
+                                         or_obsnertwork:ManagerSystem ,
+                                         or_obsnertwork:ObservacionalNetwork ,
+                                         or_obsnertwork:SuspectQualifier ,
+                                         or_obsnertwork:TransportLayers ,
+                                         or_obsnertwork:UserProducts .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#DevicesDataTypesManager
+or_obsnertwork:DevicesDataTypesManager rdf:type owl:Class ;
+                                       rdfs:subClassOf or_obsnertwork:ManagerSystem ;
+                                       owl:disjointWith or_obsnertwork:OntologyModelManager .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#FTPServer
+or_obsnertwork:FTPServer rdf:type owl:Class ;
+                         rdfs:subClassOf or_obsnertwork:Gateway ;
+                         owl:disjointWith or_obsnertwork:MQTTServer .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Gateway
+or_obsnertwork:Gateway rdf:type owl:Class ;
+                       rdfs:subClassOf ssn:System ;
+                       owl:disjointWith or_obsnertwork:IntegrationMediator ,
+                                        or_obsnertwork:ManagerSystem ,
+                                        or_obsnertwork:ObservacionalNetwork ,
+                                        or_obsnertwork:SuspectQualifier ,
+                                        or_obsnertwork:TransportLayers ,
+                                        or_obsnertwork:UserProducts .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Geological
+or_obsnertwork:Geological rdf:type owl:Class ;
+                          rdfs:subClassOf or_obsnertwork:DCP ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty or_obsnertwork:hasSensor ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass or_obsnertwork:SoilHumidityTemperatureSensor
+                                          ] ;
+                          owl:disjointWith or_obsnertwork:Hydrological .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#GovernmentAgency
+or_obsnertwork:GovernmentAgency rdf:type owl:Class ;
+                                owl:disjointWith or_obsnertwork:MunicipalityAgency ,
+                                                 or_obsnertwork:SpecialistPerson .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Hydrological
+or_obsnertwork:Hydrological rdf:type owl:Class ;
+                            rdfs:subClassOf or_obsnertwork:DCP ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty or_obsnertwork:hasSensor ;
+                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                              owl:onClass or_obsnertwork:PhotographicCamera
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty or_obsnertwork:hasSensor ;
+                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                              owl:onClass or_obsnertwork:RiverLevelSensor
+                                            ] .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#IntegrationMediator
+or_obsnertwork:IntegrationMediator rdf:type owl:Class ;
+                                   rdfs:subClassOf ssn:System ;
+                                   owl:disjointWith or_obsnertwork:ManagerSystem ,
+                                                    or_obsnertwork:ObservacionalNetwork ,
+                                                    or_obsnertwork:SuspectQualifier ,
+                                                    or_obsnertwork:TransportLayers ,
+                                                    or_obsnertwork:UserProducts .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#InternalHumidityTemperatureSensor
+or_obsnertwork:InternalHumidityTemperatureSensor rdf:type owl:Class ;
+                                                 rdfs:subClassOf ssn:Sensor ;
+                                                 owl:disjointWith or_obsnertwork:NetRadiometers ,
+                                                                  or_obsnertwork:PhotographicCamera ,
+                                                                  or_obsnertwork:Pluviometer ,
+                                                                  or_obsnertwork:Radiometers ,
+                                                                  or_obsnertwork:RiverLevelSensor ,
+                                                                  or_obsnertwork:SoilHumidityTemperatureSensor ,
+                                                                  or_obsnertwork:VoltageSensor ,
+                                                                  or_obsnertwork:WindDirectionSensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#MQTTClient
+or_obsnertwork:MQTTClient rdf:type owl:Class ;
+                          rdfs:subClassOf or_obsnertwork:IntegrationMediator ;
+                          owl:disjointWith or_obsnertwork:NormalizeData ,
+                                           or_obsnertwork:OntologyQueryService .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#MQTTServer
+or_obsnertwork:MQTTServer rdf:type owl:Class ;
+                          rdfs:subClassOf or_obsnertwork:Gateway .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#ManagerSystem
+or_obsnertwork:ManagerSystem rdf:type owl:Class ;
+                             rdfs:subClassOf ssn:System ;
+                             owl:disjointWith or_obsnertwork:ObservacionalNetwork ,
+                                              or_obsnertwork:SuspectQualifier ,
+                                              or_obsnertwork:TransportLayers ,
+                                              or_obsnertwork:UserProducts .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#ManualWarningSiren
+or_obsnertwork:ManualWarningSiren rdf:type owl:Class ;
+                                  rdfs:subClassOf or_obsnertwork:WarningSiren .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#MobileApps
+or_obsnertwork:MobileApps rdf:type owl:Class ;
+                          rdfs:subClassOf or_obsnertwork:UserProducts ;
+                          owl:disjointWith or_obsnertwork:WebService ,
+                                           or_obsnertwork:WebSite .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#ModemTelecom
+or_obsnertwork:ModemTelecom rdf:type owl:Class ;
+                            rdfs:subClassOf or_obsnertwork:TransportLayers ;
+                            owl:disjointWith or_obsnertwork:Wifi .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#MunicipalityAgency
+or_obsnertwork:MunicipalityAgency rdf:type owl:Class ;
+                                  owl:disjointWith or_obsnertwork:SpecialistPerson .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#NetRadiometers
+or_obsnertwork:NetRadiometers rdf:type owl:Class ;
+                              rdfs:subClassOf ssn:Sensor ;
+                              owl:disjointWith or_obsnertwork:PhotographicCamera ,
+                                               or_obsnertwork:Pluviometer ,
+                                               or_obsnertwork:Radiometers ,
+                                               or_obsnertwork:RiverLevelSensor ,
+                                               or_obsnertwork:SoilHumidityTemperatureSensor ,
+                                               or_obsnertwork:VoltageSensor ,
+                                               or_obsnertwork:WindDirectionSensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#No-SQL
+or_obsnertwork:No-SQL rdf:type owl:Class ;
+                      rdfs:subClassOf or_obsnertwork:Database ;
+                      owl:disjointWith or_obsnertwork:OntologyModel ,
+                                       or_obsnertwork:Postgres .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#NormalizeData
+or_obsnertwork:NormalizeData rdf:type owl:Class ;
+                             rdfs:subClassOf or_obsnertwork:IntegrationMediator ;
+                             owl:disjointWith or_obsnertwork:OntologyQueryService .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#ObservacionalNetwork
+or_obsnertwork:ObservacionalNetwork rdf:type owl:Class ;
+                                    rdfs:subClassOf ssn:System ;
+                                    owl:disjointWith or_obsnertwork:SuspectQualifier ,
+                                                     or_obsnertwork:TransportLayers ,
+                                                     or_obsnertwork:UserProducts .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#OntologyModel
+or_obsnertwork:OntologyModel rdf:type owl:Class ;
+                             rdfs:subClassOf or_obsnertwork:Database ;
+                             owl:disjointWith or_obsnertwork:Postgres .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#OntologyModelManager
+or_obsnertwork:OntologyModelManager rdf:type owl:Class ;
+                                    rdfs:subClassOf or_obsnertwork:ManagerSystem .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#OntologyQueryService
+or_obsnertwork:OntologyQueryService rdf:type owl:Class ;
+                                    rdfs:subClassOf or_obsnertwork:IntegrationMediator .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#PhotographicCamera
+or_obsnertwork:PhotographicCamera rdf:type owl:Class ;
+                                  rdfs:subClassOf ssn:Sensor ;
+                                  owl:disjointWith or_obsnertwork:Pluviometer ,
+                                                   or_obsnertwork:Radiometers ,
+                                                   or_obsnertwork:RiverLevelSensor ,
+                                                   or_obsnertwork:SoilHumidityTemperatureSensor ,
+                                                   or_obsnertwork:VoltageSensor ,
+                                                   or_obsnertwork:WindDirectionSensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Pluviometer
+or_obsnertwork:Pluviometer rdf:type owl:Class ;
+                           rdfs:subClassOf ssn:Sensor ;
+                           owl:disjointWith or_obsnertwork:Radiometers ,
+                                            or_obsnertwork:RiverLevelSensor ,
+                                            or_obsnertwork:SoilHumidityTemperatureSensor ,
+                                            or_obsnertwork:VoltageSensor ,
+                                            or_obsnertwork:WindDirectionSensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Postgres
+or_obsnertwork:Postgres rdf:type owl:Class ;
+                        rdfs:subClassOf or_obsnertwork:Database .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#PowerSystem
+or_obsnertwork:PowerSystem rdf:type owl:Class ;
+                           rdfs:subClassOf ssn:Device .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#ProductProducer
+or_obsnertwork:ProductProducer rdf:type owl:Class ;
+                               rdfs:subClassOf or_obsnertwork:DataProcess .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Radiometers
+or_obsnertwork:Radiometers rdf:type owl:Class ;
+                           rdfs:subClassOf ssn:Sensor ;
+                           owl:disjointWith or_obsnertwork:RiverLevelSensor ,
+                                            or_obsnertwork:SoilHumidityTemperatureSensor ,
+                                            or_obsnertwork:VoltageSensor ,
+                                            or_obsnertwork:WindDirectionSensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#RiverLevelSensor
+or_obsnertwork:RiverLevelSensor rdf:type owl:Class ;
+                                rdfs:subClassOf ssn:Sensor ;
+                                owl:disjointWith or_obsnertwork:SoilHumidityTemperatureSensor ,
+                                                 or_obsnertwork:VoltageSensor ,
+                                                 or_obsnertwork:WindDirectionSensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#SoilHumidityTemperatureSensor
+or_obsnertwork:SoilHumidityTemperatureSensor rdf:type owl:Class ;
+                                             rdfs:subClassOf ssn:Sensor ;
+                                             owl:disjointWith or_obsnertwork:VoltageSensor ,
+                                                              or_obsnertwork:WindDirectionSensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#SpecialistPerson
+or_obsnertwork:SpecialistPerson rdf:type owl:Class .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#SuspectQualifier
+or_obsnertwork:SuspectQualifier rdf:type owl:Class ;
+                                rdfs:subClassOf ssn:System ;
+                                owl:disjointWith or_obsnertwork:TransportLayers ,
+                                                 or_obsnertwork:UserProducts .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#SuspiciousDataQualifier
+or_obsnertwork:SuspiciousDataQualifier rdf:type owl:Class ;
+                                       rdfs:subClassOf or_obsnertwork:SuspectQualifier ;
+                                       owl:disjointWith or_obsnertwork:SuspiciousMetadataQualifier .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#SuspiciousMetadataQualifier
+or_obsnertwork:SuspiciousMetadataQualifier rdf:type owl:Class ;
+                                           rdfs:subClassOf or_obsnertwork:SuspectQualifier .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#TransportLayers
+or_obsnertwork:TransportLayers rdf:type owl:Class ;
+                               rdfs:subClassOf ssn:System ;
+                               owl:disjointWith or_obsnertwork:UserProducts .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#UserProducts
+or_obsnertwork:UserProducts rdf:type owl:Class ;
+                            rdfs:subClassOf ssn:System .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#VoltageSensor
+or_obsnertwork:VoltageSensor rdf:type owl:Class ;
+                             rdfs:subClassOf ssn:Sensor ;
+                             owl:disjointWith or_obsnertwork:WindDirectionSensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#WarningSiren
+or_obsnertwork:WarningSiren rdf:type owl:Class ;
+                            rdfs:subClassOf iot-lite:ActuatingDevice .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#WebService
+or_obsnertwork:WebService rdf:type owl:Class ;
+                          rdfs:subClassOf or_obsnertwork:UserProducts ;
+                          owl:disjointWith or_obsnertwork:WebSite .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#WebSite
+or_obsnertwork:WebSite rdf:type owl:Class ;
+                       rdfs:subClassOf or_obsnertwork:UserProducts .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Wifi
+or_obsnertwork:Wifi rdf:type owl:Class ;
+                    rdfs:subClassOf or_obsnertwork:TransportLayers .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#WindDirectionSensor
+or_obsnertwork:WindDirectionSensor rdf:type owl:Class ;
+                                   rdfs:subClassOf ssn:Sensor .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
