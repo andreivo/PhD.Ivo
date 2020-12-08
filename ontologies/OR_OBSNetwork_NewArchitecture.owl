@@ -127,10 +127,10 @@ or_obsnertwork:hasMobileApps rdf:type owl:ObjectProperty ;
                              rdfs:range or_obsnertwork:MobileApps .
 
 
-###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasModemTelecom
-or_obsnertwork:hasModemTelecom rdf:type owl:ObjectProperty ;
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasTelecomModem
+or_obsnertwork:hasTelecomModem rdf:type owl:ObjectProperty ;
                                rdfs:domain or_obsnertwork:TransportLayers ;
-                               rdfs:range or_obsnertwork:ModemTelecom .
+                               rdfs:range or_obsnertwork:TelecomModem .
 
 
 ###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasNOSQL
@@ -185,6 +185,12 @@ or_obsnertwork:hasPowerSystem rdf:type owl:ObjectProperty ;
 or_obsnertwork:hasProductProducer rdf:type owl:ObjectProperty ;
                                   rdfs:domain or_obsnertwork:DataProcess ;
                                   rdfs:range or_obsnertwork:ProductProducer .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasSatelliteModem
+or_obsnertwork:hasSatelliteModem rdf:type owl:ObjectProperty ;
+                                 rdfs:domain or_obsnertwork:TransportLayers ;
+                                 rdfs:range or_obsnertwork:SatelliteModem .
 
 
 ###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#hasSensor
@@ -775,10 +781,11 @@ or_obsnertwork:MobileApps rdf:type owl:Class ;
                                            or_obsnertwork:WebSite .
 
 
-###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#ModemTelecom
-or_obsnertwork:ModemTelecom rdf:type owl:Class ;
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#TelecomModem
+or_obsnertwork:TelecomModem rdf:type owl:Class ;
                             rdfs:subClassOf or_obsnertwork:TransportLayers ;
-                            owl:disjointWith or_obsnertwork:Wifi .
+                            owl:disjointWith or_obsnertwork:SatelliteModem ,
+                                             or_obsnertwork:Wifi .
 
 
 ###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#MunicipalityAgency
@@ -886,6 +893,12 @@ or_obsnertwork:RiverLevelSensor rdf:type owl:Class ;
                                 owl:disjointWith or_obsnertwork:SoilHumidityTemperatureSensor ,
                                                  or_obsnertwork:VoltageSensor ,
                                                  or_obsnertwork:WindDirectionSensor .
+
+
+###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#SatelliteModem
+or_obsnertwork:SatelliteModem rdf:type owl:Class ;
+                              rdfs:subClassOf or_obsnertwork:TransportLayers ;
+                              owl:disjointWith or_obsnertwork:Wifi .
 
 
 ###  https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#SoilHumidityTemperatureSensor
