@@ -17,27 +17,23 @@ import java.time.LocalDateTime;
  */
 public class MainSendMessage {
 
-    private static final String EXCHANGE_NAME = "fibase";
-    private final static String QUEUE_NAME = "DCPPluvio";
-    private final static String ROUTINGKEY = "DCPRouting";
-
     public static void main(String[] argv) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setUsername("tcsezysb");
-        factory.setVirtualHost("tcsezysb");
-        factory.setPassword("7dUNxiB9DCQgvcKkon-sDcDZIVhkCtFN");
-        factory.setHost("jackal.rmq.cloudamqp.com");
+        factory.setUsername(QueueIdentity.QUEUEUSERNAME);
+        factory.setVirtualHost(QueueIdentity.QUEUEVIRTUALHOST);
+        factory.setPassword(QueueIdentity.QUEUEPASSWORD);
+        factory.setHost(QueueIdentity.QUEUEHOST);
 
         try (Connection connection = factory.newConnection();
                 Channel channel = connection.createChannel()) {
             //DeclareQueue: Ensuring that the queue exists
-            channel.queueDeclare(QUEUE_NAME, true, false, false, null);
+            channel.queueDeclare(QueueIdentity.QUEUE_NAME, true, false, false, null);
 
             //Defines Exchange, responsible for distributing messages in the queues
-            channel.exchangeDeclare(EXCHANGE_NAME, "direct", true);
+            channel.exchangeDeclare(QueueIdentity.EXCHANGE_NAME, "direct", true);
 
             //Defines the key routes that forward messages to the queue
-            channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, ROUTINGKEY);
+            channel.queueBind(QueueIdentity.QUEUE_NAME, QueueIdentity.EXCHANGE_NAME, QueueIdentity.ROUTINGKEY);
 
             DataPackage dp = new DataPackage();
             dp.setTokenStation("TestStation");
@@ -46,7 +42,7 @@ public class MainSendMessage {
 
             String message = dp.toJson();
 
-            channel.basicPublish(EXCHANGE_NAME, ROUTINGKEY, null, message.getBytes("UTF-8"));
+            channel.basicPublish(QueueIdentity.EXCHANGE_NAME, QueueIdentity.ROUTINGKEY, null, message.getBytes("UTF-8"));
             System.out.println(" [x] Sent '" + message + "'");
 
         }

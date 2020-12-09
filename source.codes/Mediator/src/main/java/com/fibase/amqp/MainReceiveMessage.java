@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.fibase.amqpexample;
+package com.fibase.amqp;
 
+import com.fibase.QueueIdentity;
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -36,12 +37,16 @@ public class MainReceiveMessage {
 
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
+        DataProcessor dp = new DataProcessor();
+
         Consumer consumer = new DefaultConsumer(channel) {
             public void handleDelivery(String consumerTag, Envelope envelope,
                     AMQP.BasicProperties properties, byte[] body)
                     throws IOException {
                 String message = new String(body, "UTF-8");
+                message = message.replace("'", "").replace("\n", "").trim();
                 System.out.println(" Received " + envelope.getRoutingKey() + ": '" + message + "'");
+                dp.process(message);
             }
         };
 
