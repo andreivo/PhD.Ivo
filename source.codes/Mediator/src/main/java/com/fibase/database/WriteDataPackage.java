@@ -48,7 +48,7 @@ public class WriteDataPackage {
                 + measure.getDataType() + "; "
                 + measure.getSensorExternalCode().toString() + "; "
                 + measure.getCollectDateTime().format(formatter) + "; "
-                + measure.getDataValue().replace(",", ".");
+                + measure.getDataValue();
         return result;
     }
 
