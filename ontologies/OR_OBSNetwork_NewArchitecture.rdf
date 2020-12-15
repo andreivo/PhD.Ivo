@@ -535,6 +535,16 @@
     
 
 
+    <!-- https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#colDT -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#colDT">
+        <owl:equivalentProperty rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#collectDateTime"/>
+        <rdfs:domain rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#collectDateTime -->
 
     <owl:DatatypeProperty rdf:about="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#collectDateTime">
@@ -548,6 +558,7 @@
     <!-- https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#dataType -->
 
     <owl:DatatypeProperty rdf:about="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#dataType">
+        <owl:equivalentProperty rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#dtT"/>
         <owl:equivalentProperty rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#type"/>
         <rdfs:domain rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Data"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
@@ -559,6 +570,7 @@
 
     <owl:DatatypeProperty rdf:about="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#dataValue">
         <owl:equivalentProperty rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#measure"/>
+        <owl:equivalentProperty rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#val"/>
         <rdfs:domain rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Data"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
@@ -569,6 +581,15 @@
 
     <owl:DatatypeProperty rdf:about="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#dcpExternalCode">
         <rdfs:domain rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#DCP"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#dtT -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#dtT">
+        <rdfs:domain rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Data"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
@@ -645,7 +666,17 @@
     <!-- https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#passwdStation -->
 
     <owl:DatatypeProperty rdf:about="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#passwdStation">
+        <owl:equivalentProperty rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#pwdDCP"/>
         <owl:equivalentProperty rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#serverPasswd"/>
+        <rdfs:domain rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#pwdDCP -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#pwdDCP">
         <rdfs:domain rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Data"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
@@ -683,6 +714,7 @@
     <!-- https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#sensorExternalCode -->
 
     <owl:DatatypeProperty rdf:about="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#sensorExternalCode">
+        <owl:equivalentProperty rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#snsEC"/>
         <rdfs:domain rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Data"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#long"/>
     </owl:DatatypeProperty>
@@ -692,6 +724,7 @@
     <!-- https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#sentDateTime -->
 
     <owl:DatatypeProperty rdf:about="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#sentDateTime">
+        <owl:equivalentProperty rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#sntDT"/>
         <owl:equivalentProperty rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#transmissionDateTime"/>
         <rdfs:domain rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Data"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
@@ -708,9 +741,37 @@
     
 
 
+    <!-- https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#snsEC -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#snsEC">
+        <rdfs:domain rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#long"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#sntDT -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#sntDT">
+        <rdfs:domain rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#stationCode -->
 
     <owl:DatatypeProperty rdf:about="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#stationCode">
+        <owl:equivalentProperty rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#tokenStation"/>
+        <rdfs:domain rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#tknDCP -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#tknDCP">
         <owl:equivalentProperty rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#tokenStation"/>
         <rdfs:domain rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Data"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
@@ -770,6 +831,15 @@
         <rdfs:domain rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Gateway"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:comment xml:lang="en">Define FTP user.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#val -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#val">
+        <rdfs:domain rdf:resource="https://github.com/andreivo/FIBASE-Case-Study/ontologies/OR_OBSNertwork_NewArchitecture#Data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
