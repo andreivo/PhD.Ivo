@@ -8,7 +8,7 @@
 #define MQTT_PORT 1883 
 
 //Interval
-#define INTERVAL 50000
+#define INTERVAL 500000
 
 //Tempo em que o último envio/refresh foi feito
 uint32_t lastTime = 0;
@@ -25,8 +25,19 @@ PubSubClient client(MQTT_SERVER, MQTT_PORT, gsmClient);
 
 void setup() {
     Serial.begin(115200);
+    delay(1000);
+    Serial.println("Modem turn on...");
+    pinMode(23, OUTPUT);
+    digitalWrite(23, HIGH); //Liga o modem TIP122
+    delay(10000);
+
+    pinMode(14, OUTPUT);
+    digitalWrite(14, LOW);
+  
     setupGSM(); //Inicializa e configura o modem GSM
     connectMQTTServer(); //Conectamos ao mqtt server
+    //modemGSM.sleepEnableImpl(true);
+    //delay(5000);
 }
 
 void loop() {
@@ -35,6 +46,10 @@ void loop() {
   {
     //Mandamos conectar
     connectMQTTServer();
+    //digitalWrite(14, LOW);
+   // delay(100);
+    //modemGSM.sleepEnableImpl(false);
+    //delay(5000);
   }
 
    //Tempo decorrido desde o boot em milissegundos
@@ -107,20 +122,20 @@ void connectMQTTServer() {
 
 void publishMQTT()
 {
-  //Cria o json que iremos enviar para o server MQTT
-  String msg = createJsonString1();
-  Serial.print("Publish message 1: ");
-  Serial.println(msg);
-  //Publicamos no tópico
-  int status = client.publish(TOPIC, msg.c_str());
-  Serial.println("Status msg 1: " + String(status));//Status 1 se sucesso ou 0 se deu erro
-
-  msg = createJsonString2();
-  Serial.print("Publish message 2: ");
-  Serial.println(msg);
-  //Publicamos no tópico
-  status = client.publish(TOPIC, msg.c_str());
-  Serial.println("Status msg 2: " + String(status));//Status 1 se sucesso ou 0 se deu erro
+//  //Cria o json que iremos enviar para o server MQTT
+//  String msg = createJsonString1();
+//  Serial.print("Publish message 1: ");
+//  Serial.println(msg);
+//  //Publicamos no tópico
+//  int status = client.publish(TOPIC, msg.c_str());
+//  Serial.println("Status msg 1: " + String(status));//Status 1 se sucesso ou 0 se deu erro
+//
+//  msg = createJsonString2();
+//  Serial.print("Publish message 2: ");
+//  Serial.println(msg);
+//  //Publicamos no tópico
+//  status = client.publish(TOPIC, msg.c_str());
+//  Serial.println("Status msg 2: " + String(status));//Status 1 se sucesso ou 0 se deu erro
 }
 
 String createJsonString1() 

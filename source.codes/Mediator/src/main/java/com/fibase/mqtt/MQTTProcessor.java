@@ -47,7 +47,7 @@ public class MQTTProcessor {
         }
 
         if (client.isConnected()) {
-            System.out.println("Send MQTT message....");
+            System.out.println("Send MQTT message of Station: " + dp.getTokenStation().toLowerCase());
 
             // Sends Data
             MqttMessage message = new MqttMessage(payload.getBytes("UTF-8"));
@@ -61,7 +61,7 @@ public class MQTTProcessor {
     private static String formatPayload(DataPackage dp) {
         String result = "";
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss'Z'");
 
         for (MeasuresDtp measure : dp.getMeasures()) {
             if (result != "") {

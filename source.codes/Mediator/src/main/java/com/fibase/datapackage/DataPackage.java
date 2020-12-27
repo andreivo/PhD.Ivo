@@ -82,7 +82,7 @@ public class DataPackage {
                 writer.nullValue();
                 return;
             }
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss'Z'");
             writer.value(formatter.format(value));
         }
 
@@ -93,7 +93,7 @@ public class DataPackage {
                 return null;
             }
             String str = reader.nextString();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss'Z'");
             LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
             return dateTime;
         }
