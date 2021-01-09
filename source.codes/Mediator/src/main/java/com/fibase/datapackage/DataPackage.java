@@ -18,6 +18,7 @@ public class DataPackage {
     private String passwdStation;
     private LocalDateTime sentDateTime;
     private List<MeasuresDtp> measures;
+    private List<MetadataDtp> metadata;
 
     public DataPackage() {
         this.measures = new ArrayList<>();
@@ -57,6 +58,14 @@ public class DataPackage {
 
     public void addMeasures(LocalDateTime dateTime, String value, Long sensorExternalCode, String dateType) {
         this.measures.add(new MeasuresDtp(dateTime, value, sensorExternalCode, dateType));
+    }
+
+    public List<MetadataDtp> getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(List<MetadataDtp> metadata) {
+        this.metadata = metadata;
     }
 
     public String toJson() {

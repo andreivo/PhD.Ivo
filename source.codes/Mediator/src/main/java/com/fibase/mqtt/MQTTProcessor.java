@@ -10,6 +10,7 @@ import static com.fibase.QueueIdentity.MQTTTOKEN;
 import static com.fibase.QueueIdentity.MQTTTOPIC;
 import com.fibase.datapackage.DataPackage;
 import com.fibase.datapackage.MeasuresDtp;
+import com.fibase.datapackage.MetadataDtp;
 import java.io.UnsupportedEncodingException;
 import java.time.format.DateTimeFormatter;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -55,6 +56,7 @@ public class MQTTProcessor {
 
             client.publish(MQTTTOPIC + dp.getTokenStation().toLowerCase(), message);
             client.disconnect();
+            System.out.println("Finish send message of Station: " + dp.getTokenStation().toLowerCase());
         }
     }
 
@@ -63,20 +65,34 @@ public class MQTTProcessor {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss'Z'");
 
-        for (MeasuresDtp measure : dp.getMeasures()) {
-            if (result != "") {
-                result = result + ",";
+        if (dp.getMeasures() != null) {
+            for (MeasuresDtp measure : dp.getMeasures()) {
+                if (result != "") {
+                    result = result + ",";
+                }
+                result = result + "\"" + measure.getDataType() + "\":";
+                result = result + "{\"value\":" + measure.getDataValue();
+                result = result + ",\"context\":{\"collect\":\"" + measure.getCollectDateTime().format(formatter) + "\"}}";
             }
-            result = result + "\"" + measure.getDataType() + "\":";
-            //result = result + measure.getDataValue();
-            result = result + "{\"value\":" + measure.getDataValue();
-            result = result + ",\"context\":{\"collect\":\"" + measure.getCollectDateTime().format(formatter) + "\"}}";
         }
 
-        //{"VARIABLE_LABEL" : {"value" : 30 , "context" : {"key" : "KEY-VALUE"}}}
-        //{"pluvio"         : {"value" : 24 , "context" : {"collect":"2020-12-06 18:10:24"}},"battery":{"value":143,99977,"context":{"collect":"2020-12-06 18:10:24"}}}
-        System.out.println("{" + result + "}");
+        if (dp.getMetadata() != null) {
+            for (MetadataDtp metadata : dp.getMetadata()) {
+                if (result != "") {
+                    result = result + ",";
+                }
+                result = result + "\"" + metadata.getDataType() + "\":";
+                result = result + "{\"value\":" + metadata.getDataValue();
+                result = result + ",\"context\":{\"collect\":\"" + metadata.getCollectDateTime().format(formatter) + "\"";
 
+                if (metadata.getContext() != null) {
+                    result = result + ",\"context\":\"" + metadata.getContext() + "\"";
+                }
+
+                result = result + "}}";
+            }
+        }
+        System.out.println("{" + result + "}");
         return "{" + result + "}";
     }
 

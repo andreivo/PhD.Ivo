@@ -1,20 +1,17 @@
-/******************************************************
- 
-* ESP32 Analog Input Test
- 
-* Analog Input: ADC_1_0 pin ==&gt; GPIO36 (VP).
- 
-*
- 
-* MJRoBot.org 6Sept17
- 
-*****************************************************/
- 
 //Analog Input
  
-#define ANALOG_PIN_0 15
+#define ANALOG_PIN_0 34
  
 int analog_value = 0;
+
+#define R1 33.0
+#define R2 10.0
+#define RESISTOR_DIVIDER (R2/(R1+R2))
+#define MAX_VOLTAGE_ADC 3.33
+#define MAX_VOLTAGE_READ (MAX_VOLTAGE_ADC / RESISTOR_DIVIDER)
+#define MAX_ADC_VALUE 4096
+#define ADC2VOLTS(adc) ((adc * MAX_VOLTAGE_READ)/MAX_ADC_VALUE)
+
  
 void setup()
 {
@@ -26,10 +23,8 @@ void setup()
 void loop()
 {
  analog_value = analogRead(ANALOG_PIN_0);
- double voltage =  (analog_value*12.00)/3863.00;
  Serial.print("Voltage: ");
- Serial.print(voltage);
- Serial.print("V - ");
- Serial.println(analog_value);
+ Serial.print(ADC2VOLTS(analog_value));
+ Serial.println("v");
  delay(500); 
 }

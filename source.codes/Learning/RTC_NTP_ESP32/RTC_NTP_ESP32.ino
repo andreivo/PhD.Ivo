@@ -32,7 +32,7 @@ void setup()
   setupNTP();
   
   timeval tv;//Cria a estrutura temporaria para funcao abaixo.
-  tv.tv_sec = 1608728973;
+  tv.tv_sec = 1609235898;
   //tv.tv_sec = ntpClient.getEpochTime();//Atribui minha data atual. Voce pode usar o NTP para isso ou o site citado no artigo!
   settimeofday(&tv, NULL);//Configura o RTC para manter a data atribuida atualizada.
 

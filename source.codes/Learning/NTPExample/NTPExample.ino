@@ -3,7 +3,7 @@
 #include <WiFiUdp.h> //Socket UDP
 
 //Fuso Horário, no caso horário de verão de Brasília 
-int timeZone = -3;
+int timeZone = 0;
 
 //Struct com os dados do dia e hora
 struct Date{
@@ -123,6 +123,7 @@ void loop()
 Date getDate()
 {
     //Recupera os dados de data e horário usando o client NTP
+    Serial.println(    ntpClient.getFormattedDate());
     char* strDate = (char*)ntpClient.getFormattedDate().c_str();
 
     //Passa os dados da string para a struct

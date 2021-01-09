@@ -62,8 +62,8 @@ void setup()
   
   Serial.println("done!");
 
-  writeFile();
-  Serial.println("done!");
+  //writeFile();
+  //Serial.println("done!");
 }
 
 void loop()
@@ -101,40 +101,58 @@ void printDirectory(FileSD dir, int numTabs) {
 }
 
 void writeFile(){
-//  // open the file. note that only one file can be open at a time,
-//  // so you have to close this one before opening another.
-//  myFile = SD.open("20201212.dht", FILE_WRITE);
-//  
-//  // if the file opened okay, write to it:
-//  if (myFile) {
-//    Serial.print("Writing to test.txt...");
-//    myFile.println("testing 1, 2, 3.");
-//  // close the file:
-//    myFile.close();
-//    Serial.println("done.");
-//  } else {
-//    // if the file didn't open, print an error:
-//    Serial.println("error opening");
-//  }
+  // open the file. note that only one file can be open at a time,
+  // so you have to close this one before opening another.
+  myFile = SD.open("xxxx.dht", FILE_WRITE);
+  
+  // if the file opened okay, write to it:
+  if (myFile) {
+    Serial.print("Writing to test.txt...");
+    myFile.println("testing 1, 2, 3.");
+  // close the file:
+    myFile.close();
+    Serial.println("done.");
+  } else {
+    // if the file didn't open, print an error:
+    Serial.println("error opening");
+  }
   
   // re-open the file for reading:
-  myFile = SD.open("20201224.DHT");
+  myFile = SD.open("xxxx.DHT");
   if (myFile) {
-    Serial.println("20201224.DHT:");
-    
+    Serial.println("xxxx.DHT:");
+    String result = "";
     // read from the file until there's nothing else in it:
     while (myFile.available()) {
-      char x = (char) myFile.read();
-      if(x=='\n'){
-      Serial.println("");
-      }
-      Serial.print(x);
+      result = result + (char) myFile.read();
+      //char x = (char) myFile.read();
+      //if(x=='\n'){
+//      Serial.println("");
+//      }
+//      Serial.print(x);
     }
     // close the file:
     myFile.close();
+    Serial.println(result);
   } else {
     // if the file didn't open, print an error:
     Serial.println("error opening test.txt");
   }
   
+}
+
+String getFirstFile(String path) {
+  FileSD dir = SD.open(path.c_str());
+  // Begin at the start of the directory
+  dir.rewindDirectory();
+  
+  FileSD entry = dir.openNextFile();
+  if (!entry) {
+      entry.close();
+      return "";
+  }
+  String filename = entry.name();
+  entry.close();
+  return filename;
+       
 }

@@ -18,10 +18,10 @@ void setup()
   Serial.println("Modem turn on...");
   pinMode(23, OUTPUT);
   digitalWrite(23, HIGH); //Liga o modem TIP122
-  delay(10000);
+  delay(20000);
   
   Serial.println("Initializing...");
-  delay(1000);
+  delay(5000);
 
   mySerial.println("AT"); //Once the handshake test is successful, it will back to OK
   updateSerial();
@@ -32,7 +32,7 @@ void setup()
   mySerial.println("AT+CREG?"); //Check whether it has registered in the network
   updateSerial();
 
-  digitalWrite(23, LOW); //Liga o modem TIP122
+  //digitalWrite(23, LOW); //Liga o modem TIP122
 }
 
 void loop()

@@ -12,10 +12,10 @@ void setup() {
 }
 
 void loop() {
-  Serial.print("ler");
+  Serial.println("ler: ");
   // put your main code here, to run repeatedly:
   readDHT();
-  delay(5000);
+  delay(500);
 }
 
 void readDHT()
@@ -28,5 +28,7 @@ void readDHT()
     Serial.println(t);
     Serial.print("humidity = ");
     Serial.println(h);
-  }
+  }else{
+    Serial.println("Erro ao ler!");
+    }
 }
