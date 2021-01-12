@@ -18,7 +18,7 @@ void setup()
   Serial.println("Modem turn on...");
   pinMode(23, OUTPUT);
   digitalWrite(23, HIGH); //Liga o modem TIP122
-  delay(20000);
+  delay(60000);
   
   Serial.println("Initializing...");
   delay(5000);
@@ -46,23 +46,28 @@ void loop()
 void updateSerial()
 {
   delay(500);
-  while (Serial.available()) 
-  {
+//  while (Serial.available()) 
+//  {
+//
+//    String str = Serial.readString();
+//    if(str.substring(0) == "on\r\n"){
+//      digitalWrite(23, HIGH);
+//      Serial.println("Modem turn on...");
+//      delay(10000);
+//      modenOn = true;
+//    } 
+//
+//    if(str.substring(0) == "off\r\n"){
+//      Serial.println("Modem turn off...");
+//      digitalWrite(23, LOW);
+//      modenOn = false;
+//    }
+//
+//  }
 
-    String str = Serial.readString();
-    if(str.substring(0) == "on\r\n"){
-      digitalWrite(23, HIGH);
-      Serial.println("Modem turn on...");
-      delay(10000);
-      modenOn = true;
-    } 
-
-    if(str.substring(0) == "off\r\n"){
-      Serial.println("Modem turn off...");
-      digitalWrite(23, LOW);
-      modenOn = false;
-    }
-
+  while(Serial.available()) 
+  {    
+    mySerial.write(Serial.read());//Forward what Software Serial received to Serial Port
   }
   while(mySerial.available()) 
   {    

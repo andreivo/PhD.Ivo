@@ -9,7 +9,7 @@ import com.fibase.Constants;
 import com.fibase.database.WriteDataPackage;
 import com.fibase.datapackage.DataPackage;
 import com.fibase.mediator.DataPackageNormalizer;
-import com.fibase.mqtt.MQTTProcessor;
+import com.fibase.mqtt.MQTTProcessorThread;
 
 /**
  *
@@ -30,13 +30,12 @@ public class DataProcessor {
             if (dp != null) {
                 if (dp.getTokenStation() != null) {
                     WriteDataPackage.csv(dp);
-                    MQTTProcessor.publish(dp);
+                    MQTTProcessorThread.publish(dp);
                 }
             }
         } catch (Exception ex) {
             System.out.println("Error normalize DataPackage! Erro: " + ex.getMessage());
         }
-
     }
 
 }
