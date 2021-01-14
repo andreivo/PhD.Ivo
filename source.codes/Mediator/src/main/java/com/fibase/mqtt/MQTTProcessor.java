@@ -5,9 +5,7 @@
  */
 package com.fibase.mqtt;
 
-import static com.fibase.QueueIdentity.MQTTBROKERURL;
-import static com.fibase.QueueIdentity.MQTTTOKEN;
-import static com.fibase.QueueIdentity.MQTTTOPIC;
+import com.fibase.QueueIdentity;
 import com.fibase.datapackage.DataPackage;
 import com.fibase.datapackage.MeasuresDtp;
 import com.fibase.datapackage.MetadataDtp;
@@ -38,9 +36,9 @@ public class MQTTProcessor {
 
         conOpt = new MqttConnectOptions();
         conOpt.setCleanSession(true);
-        conOpt.setUserName(MQTTTOKEN);
+        conOpt.setUserName(QueueIdentity.MQTTTOKEN);
 
-        client = new MqttClient(MQTTBROKERURL, MqttClient.generateClientId());
+        client = new MqttClient(QueueIdentity.MQTTBROKERURL, MqttClient.generateClientId());
 
         if (!client.isConnected()) {
             System.out.println("Connecting to MQTT broker ...");
@@ -54,7 +52,7 @@ public class MQTTProcessor {
             MqttMessage message = new MqttMessage(payload.getBytes("UTF-8"));
             message.setQos(qos);
 
-            client.publish(MQTTTOPIC + dp.getTokenStation().toLowerCase(), message);
+            client.publish(QueueIdentity.MQTTTOPIC + dp.getTokenStation().toLowerCase(), message);
             client.disconnect();
             System.out.println("Finish send message of Station: " + dp.getTokenStation().toLowerCase());
         }

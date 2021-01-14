@@ -39,7 +39,7 @@ public class MQTTProcessorThread {
 
         try {
             System.out.println("Started Publishing THREAD..");
-            System.out.println(future.get(5, TimeUnit.SECONDS));
+            System.out.println(future.get(20, TimeUnit.SECONDS));
             System.out.println("Finished Publishing THREAD!");
         } catch (TimeoutException e) {
             future.cancel(true);

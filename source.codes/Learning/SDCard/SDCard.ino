@@ -48,7 +48,8 @@ void setup()
   // Note that even if it's not used as the CS pin, the hardware SS pin 
   // (10 on Arduino Uno boards, 53 on the Mega) must be left as an output 
   // or the SD library functions will not work. 
-  pinMode(SS, OUTPUT);
+  pinMode(MICROSD_PIN_CHIP_SELECT, OUTPUT);
+  pinMode(MICROSD_PIN_MOSI,INPUT_PULLUP);
   
   if (!SD.begin(MICROSD_PIN_CHIP_SELECT, MICROSD_PIN_MOSI, MICROSD_PIN_MISO, MICROSD_PIN_SCK)) {
     Serial.println("initialization failed!");
