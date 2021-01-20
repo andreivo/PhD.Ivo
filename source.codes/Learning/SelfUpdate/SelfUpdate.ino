@@ -3,13 +3,11 @@
 #include "SdFat.h"
 #include <SPI.h>
 #include <Update.h>
-#include <ESP32_FTPClient.h>
 
-char ftp_server[] = "files.000webhost.com";
-char ftp_user[]   = "cicadadcp";
-char ftp_pass[]   = "cicada123";
+WiFiClient client;
 
-ESP32_FTPClient ftp (ftp_server,ftp_user,ftp_pass);
+long contentLength = 0;
+bool isValidContentType = false;
 
 
 const int MICROSD_PIN_CHIP_SELECT = 21; // Pino serial
@@ -46,19 +44,14 @@ void setup() {
 
   
   printDirectory("update");
-  
-  //startUpdate("update/testeOTA.ino.esp32.bin");
+  downloadFile();
+  printDirectory("update");
+  startUpdate("update/cicadaDCP.bin");
 
 }
 void loop() {
-  downloadFile();
-  //printDirectory("update");
 
-  while (1){
-    Serial.println("wait");
-    delay(1000); //Wait for 5 seconds before writing the next data 
-  }
-  
+//    delay(5000); //Wait for 5 seconds before writing the next data 
 }
 
 void printDirectory(String path) {
@@ -147,90 +140,148 @@ void connectWiFi()
     Serial.println(WiFi.SSID());
 }
 
-
-void downloadFile(){
-  ftp.OpenConnection();
-
-  //Change directory
-  ftp.ChangeWorkDir("/public_html/update/all");
-
-  // Get the file size
-  const char * fileName = "testeOTA.bin";
-  size_t       fileSize = 0;
-  String       list[128];
-
-  // Get the directory content in order to allocate buffer
-  // my server response is type=file;size=18;modify=20190731140703;unix.mode=0644;unix.uid=10183013;unix.gid=10183013;unique=809g7c8e92e4; helloworld.txt
-  ftp.InitFile("Type A");
-  ftp.ContentList("", list);
-  for( uint8_t i = 0; i < sizeof(list); i++)
-  {
-    uint8_t indexSize = 0;
-    uint8_t indexMod  = 0;
-
-    if(list[i].length() > 0)
-    {
-      //list[i].toLowerCase();
-      
-      if( list[i].indexOf(fileName) > -1 )
-      {
-        indexSize = list[i].indexOf("size") + 5;
-        indexMod  = list[i].indexOf("modify") - 1;
-
-        fileSize = list[i].substring(indexSize, indexMod).toInt();
-      }
-
-      // Print the directory details
-      Serial.println(list[i]);
-    }
-    else
-      break;
-  }
-
-  // Print file size
-  Serial.println("\nFile size is: " + String(fileSize));
-
-  //Dynammically alocate buffer
-  unsigned char * downloaded_file = (unsigned char *) malloc(fileSize);
-
-  // And download the file
-Serial.println("0");  
-  ftp.InitFile("Type I");
-Serial.println("1");  
-  ftp.DownloadFile(fileName, downloaded_file, fileSize, false);
-Serial.println("2");
-  printBuffered(downloaded_file, fileSize);
-Serial.println("3");
-//  File32 myFile;
-//  if (myFile.open("update/test.bin", O_WRITE | O_CREAT)) {
-//      myFile.write(&downloaded_file, fileSize);
-//      //myFile.println(downloaded_file);
-//      // close the file:
-//      myFile.close();
-//  } else {
-//      // if the file didn't open, print an error:
-//      Serial.print(F("Error opening "));
-//      Serial.println("update/test.bin");
-//  }
-  Serial.println("finish");
+// Utility to extract header value from headers
+String getHeaderValue(String header, String headerName) {
+  return header.substring(strlen(headerName.c_str()));
 }
 
-void printBuffered( unsigned char * data, int dataLength) {
-  unsigned char clientBuf[dataLength];
-  size_t clientCount = 0;
+// OTA Logic 
+void downloadFile() {
   
-  for(int i = 0; i < dataLength;i++){
-    Serial.write(data[i]);
-//    clientBuf[clientCount] = data[i];
-//    //client.write(data[i])
-//    clientCount++;
-//    if (clientCount > bufferSize-1) {
-//        cli->write(clientBuf, bufferSize); 
-//      clientCount = 0;
-//    }
+  String host = "www.cemaden.gov.br";
+  int port = 80;
+  String bin = "/arquivos/cigarra/CicadaOTA.bin";
+
+  
+  Serial.println("Connecting to: " + String(host));
+  // Connect to S3
+  if (client.connect(host.c_str(), port)) {
+    // Connection Succeed.
+    // Fecthing the bin
+    Serial.println("Fetching Bin: " + String(bin));
+
+    // Get the contents of the bin file
+    client.print(String("GET ") + bin + " HTTP/1.1\r\n" +
+                 "Host: " + host + "\r\n" +
+                 "Cache-Control: no-cache\r\n" +
+                 "Connection: close\r\n\r\n");
+
+    // Check what is being sent
+        Serial.print(String("GET ") + bin + " HTTP/1.1\r\n" +
+                     "Host: " + host + "\r\n" +
+                     "Cache-Control: no-cache\r\n" +
+                     "Connection: close\r\n\r\n");
+
+    unsigned long timeout = millis();
+    while (client.available() == 0) {
+      if (millis() - timeout > 50000) {
+        Serial.println("Client Timeout !");
+        client.stop();
+        return;
+      }
+    }
+    // Once the response is available,
+    // check stuff
+
+    /*
+       Response Structure
+        HTTP/1.1 200 OK
+        x-amz-id-2: NVKxnU1aIQMmpGKhSwpCBh8y2JPbak18QLIfE+OiUDOos+7UftZKjtCFqrwsGOZRN5Zee0jpTd0=
+        x-amz-request-id: 2D56B47560B764EC
+        Date: Wed, 14 Jun 2017 03:33:59 GMT
+        Last-Modified: Fri, 02 Jun 2017 14:50:11 GMT
+        ETag: "d2afebbaaebc38cd669ce36727152af9"
+        Accept-Ranges: bytes
+        Content-Type: application/octet-stream
+        Content-Length: 357280
+        Server: AmazonS3
+                                   
+        {{BIN FILE CONTENTS}}
+
+    */
+    while (client.available()) {
+      // read line till /n
+      String line = client.readStringUntil('\n');
+      // remove space, to check if the line is end of headers
+      line.trim();
+
+      // if the the line is empty,
+      // this is end of headers
+      // break the while and feed the
+      // remaining `client` to the
+      // Update.writeStream();
+      if (!line.length()) {
+        //headers ended
+        break; // and get the OTA started
+      }
+
+      // Check if the HTTP Response is 200
+      // else break and Exit Update
+      if (line.startsWith("HTTP/1.1")) {
+        if (line.indexOf("200") < 0) {
+          Serial.println("Got a non 200 status code from server. Exiting OTA Update.");
+          Serial.println(line);
+          break;
+        }
+      }
+
+      // extract headers here
+      // Start with content length
+      if (line.startsWith("Content-Length: ")) {
+        contentLength = atol((getHeaderValue(line, "Content-Length: ")).c_str());
+        Serial.println("Got " + String(contentLength) + " bytes from server");
+      }
+
+      // Next, the content type
+      if (line.startsWith("Content-Type: ")) {
+        String contentType = getHeaderValue(line, "Content-Type: ");
+        Serial.println("Got " + contentType + " payload.");
+        if (contentType == "application/octet-stream") {
+          isValidContentType = true;
+        }
+      }
+    }
+  } else {
+    // Connect to S3 failed
+    // May be try?
+    // Probably a choppy network?
+    Serial.println("Connection to " + String(host) + " failed. Please check your setup");
+    // retry??
+    // execOTA();
   }
-  
-//  if (clientCount > 0){
-//      cli->write(clientBuf, clientCount); 
-//  }
+
+  // Check what is the contentLength and if content type is `application/octet-stream`
+  Serial.println("contentLength : " + String(contentLength) + ", isValidContentType : " + String(isValidContentType));
+
+  // check contentLength and content type
+  if (contentLength && isValidContentType) {
+    // create buffer for read
+    uint8_t buff[128] = { 0 };
+    File32 myFile;
+    if (myFile.open("update/test.bin", O_WRONLY | O_CREAT)) {
+      // read all data from server
+      while(contentLength > 0 || contentLength == -1) {
+          // get available data size
+          size_t size = client.available();
+          if(size) {
+              // read up to 128 byte
+              int c = client.readBytes(buff, ((size > sizeof(buff)) ? sizeof(buff) : size));
+
+              // write it to Serial
+              myFile.write(buff, c);
+
+              if(contentLength > 0) {
+                  contentLength -= c;
+              }
+          }
+          delay(1);
+      }
+      myFile.close();  
+      Serial.println("finish");
+    }
+    
+  } else {
+    Serial.println("There was no content in the response");
+    client.flush();
+  }
 }

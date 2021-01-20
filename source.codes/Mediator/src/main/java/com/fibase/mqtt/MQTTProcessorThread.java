@@ -31,10 +31,21 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
  */
 public class MQTTProcessorThread {
 
-    public static void publish(DataPackage dp) throws MqttException, UnsupportedEncodingException, InterruptedException, ExecutionException {
+    private MqttClient client;
+    private MqttConnectOptions conOpt;
+
+    public MQTTProcessorThread() throws MqttException, UnsupportedEncodingException {
+        conOpt = new MqttConnectOptions();
+        conOpt.setCleanSession(true);
+        conOpt.setUserName(MQTTTOKEN);
+
+        client = new MqttClient(MQTTBROKERURL, MqttClient.generateClientId());
+    }
+
+    public void publish(DataPackage dp) throws MqttException, UnsupportedEncodingException, InterruptedException, ExecutionException {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         TaskMQTT taskMQTT = new TaskMQTT();
-        taskMQTT.setDataPackage(dp);
+        taskMQTT.setDataPackage(dp, client, conOpt);
         Future<String> future = executor.submit(taskMQTT);
 
         try {
@@ -46,18 +57,23 @@ public class MQTTProcessorThread {
             System.out.println("Timeout Publishing THREAD!");
         }
 
+        taskMQTT = null;
+        dp = null;
         executor.shutdownNow();
-
+        executor = null;
     }
-
 }
 
 class TaskMQTT implements Callable<String> {
 
     private DataPackage dp;
+    private MqttClient client;
+    private MqttConnectOptions conOpt;
 
-    public void setDataPackage(DataPackage dp) {
+    public void setDataPackage(DataPackage dp, MqttClient client, MqttConnectOptions conOpt) {
         this.dp = dp;
+        this.client = client;
+        this.conOpt = conOpt;
     }
 
     @Override
@@ -77,16 +93,6 @@ class TaskMQTT implements Callable<String> {
         String payload = formatPayload(dp);
         int qos = 0;
 
-        // Creates the MQTT client
-        MqttClient client;
-        MqttConnectOptions conOpt;
-
-        conOpt = new MqttConnectOptions();
-        conOpt.setCleanSession(true);
-        conOpt.setUserName(MQTTTOKEN);
-
-        client = new MqttClient(MQTTBROKERURL, MqttClient.generateClientId());
-
         if (!client.isConnected()) {
             System.out.println("Connecting to MQTT broker ...");
             client.connect(conOpt);
@@ -103,6 +109,7 @@ class TaskMQTT implements Callable<String> {
             client.disconnect();
             System.out.println("Finish send message of Station: " + dp.getTokenStation().toLowerCase());
         }
+
     }
 
     private String formatPayload(DataPackage dp) {

@@ -10,6 +10,8 @@ import com.fibase.database.WriteDataPackage;
 import com.fibase.datapackage.DataPackage;
 import com.fibase.mediator.DataPackageNormalizer;
 import com.fibase.mqtt.MQTTProcessorThread;
+import java.io.UnsupportedEncodingException;
+import org.eclipse.paho.client.mqttv3.MqttException;
 
 /**
  *
@@ -18,9 +20,11 @@ import com.fibase.mqtt.MQTTProcessorThread;
 public class DataProcessor {
 
     private final DataPackageNormalizer dpn;
+    private MQTTProcessorThread mqttpt;
 
-    public DataProcessor() {
+    public DataProcessor() throws MqttException, UnsupportedEncodingException {
         this.dpn = new DataPackageNormalizer(Constants.ONTOLOGYPATH);
+        this.mqttpt = new MQTTProcessorThread();
     }
 
     public void process(String message) {
@@ -30,7 +34,7 @@ public class DataProcessor {
             if (dp != null) {
                 if (dp.getTokenStation() != null) {
                     WriteDataPackage.csv(dp);
-                    MQTTProcessorThread.publish(dp);
+                    mqttpt.publish(dp);
                 }
             }
         } catch (Exception ex) {
