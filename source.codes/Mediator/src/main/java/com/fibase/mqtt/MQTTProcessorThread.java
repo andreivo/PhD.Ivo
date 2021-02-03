@@ -62,6 +62,13 @@ public class MQTTProcessorThread {
         executor.shutdownNow();
         executor = null;
     }
+
+    public void free() {
+        try {
+            super.finalize();
+        } catch (Throwable ex) {
+        }
+    }
 }
 
 class TaskMQTT implements Callable<String> {

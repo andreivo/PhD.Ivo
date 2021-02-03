@@ -14,6 +14,7 @@ import com.rabbitmq.client.Consumer;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 public class MainReceiveMessage {
 
@@ -42,7 +43,7 @@ public class MainReceiveMessage {
         Consumer consumer = new DefaultConsumer(channel) {
             public void handleDelivery(String consumerTag, Envelope envelope,
                     AMQP.BasicProperties properties, byte[] body)
-                    throws IOException {
+                    throws IOException, UnsupportedEncodingException {
                 String message = new String(body, "UTF-8");
                 message = message.replace("'", "").replace("\n", "").trim();
                 System.out.println(" Received " + envelope.getRoutingKey() + ": '" + message + "'");

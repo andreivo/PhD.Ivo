@@ -79,6 +79,13 @@ public class DataPackageNormalizer {
 
     }
 
+    public void free() {
+        try {
+            super.finalize();
+        } catch (Throwable ex) {
+        }
+    }
+
 //        /**
 //     * @param args the command line arguments
 //     */

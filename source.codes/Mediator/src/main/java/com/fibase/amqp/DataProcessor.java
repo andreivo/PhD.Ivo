@@ -11,6 +11,8 @@ import com.fibase.datapackage.DataPackage;
 import com.fibase.mediator.DataPackageNormalizer;
 import com.fibase.mqtt.MQTTProcessorThread;
 import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
 /**
@@ -19,7 +21,7 @@ import org.eclipse.paho.client.mqttv3.MqttException;
  */
 public class DataProcessor {
 
-    private final DataPackageNormalizer dpn;
+    private DataPackageNormalizer dpn;
     private MQTTProcessorThread mqttpt;
 
     public DataProcessor() throws MqttException, UnsupportedEncodingException {
@@ -39,6 +41,13 @@ public class DataProcessor {
             }
         } catch (Exception ex) {
             System.out.println("Error normalize DataPackage! Erro: " + ex.getMessage());
+            this.mqttpt.free();
+            try {
+                this.mqttpt = new MQTTProcessorThread();
+            } catch (Exception ex1) {
+                Logger.getLogger(DataProcessor.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+
         }
     }
 
